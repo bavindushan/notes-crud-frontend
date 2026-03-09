@@ -1,76 +1,429 @@
-body {
-    font-family: Arial, sans-serif;
-    background: #eef2f7; /* light gray background */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0d0d0d;
+    min-height: 100vh;
+    color: #e8e4dc;
+}
+
+/* ── Layout ── */
+.app-wrapper {
+    min-height: 100vh;
+    background: #0d0d0d;
+    background-image:
+        radial-gradient(ellipse 80% 50% at 20% 10%, rgba(212, 175, 85, 0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 80% 90%, rgba(212, 175, 85, 0.04) 0%, transparent 60%);
 }
 
 .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 48px 24px;
 }
 
-h1 {
-    text-align: center;
-    color: #333;
+/* ── Header ── */
+.header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 52px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid rgba(212, 175, 85, 0.2);
 }
 
-form {
-    background: #ffffff;
-    padding: 15px;
-    border-radius: 8px;
+.header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.header-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #d4af55;
+    font-weight: 500;
+}
+
+.header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #f5f0e8;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.note-count {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(232, 228, 220, 0.35);
+    font-weight: 400;
+    padding-bottom: 6px;
+}
+
+/* ── Form Card ── */
+.form-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 85, 0.15);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+}
+
+.form-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 85, 0.4), transparent);
+}
+
+.form-card:focus-within {
+    border-color: rgba(212, 175, 85, 0.35);
+}
+
+.form-heading {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #f5f0e8;
+    margin-bottom: 28px;
+}
+
+.form-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #d4af55;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.field-group {
     margin-bottom: 20px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-input,
-textarea {
+.form-input,
+.form-textarea {
     width: 100%;
-    padding: 8px;
-    margin: 6px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(232, 228, 220, 0.1);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #e8e4dc;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    resize: none;
 }
 
-button {
-    padding: 8px 12px;
-    margin-right: 5px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    color: white;
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: rgba(232, 228, 220, 0.3);
 }
 
-button:hover {
-    opacity: 0.9;
+.form-input:focus,
+.form-textarea:focus {
+    border-color: rgba(212, 175, 85, 0.4);
+    background: rgba(255, 255, 255, 0.06);
 }
 
-/* Button colors */
-button:first-of-type {
-    background: #007bff; /* edit button */
+.form-textarea {
+    min-height: 100px;
 }
 
-button:last-of-type {
-    background: #dc3545; /* delete button */
-}
-
-form button {
-    background: #28a745; /* save button */
-}
-
-.note-card {
-    background: #ffffff;
-    padding: 15px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border-left: 5px solid #0056b3;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-.note-card button {
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
     margin-top: 8px;
 }
 
-.note-card + .note-card {
-    margin-top: 10px;
+/* ── Buttons ── */
+.btn {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: #d4af55;
+    color: #0d0d0d;
+}
+
+.btn-primary:hover {
+    background: #e0c170;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(212, 175, 85, 0.3);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: rgba(232, 228, 220, 0.5);
+    border: 1px solid rgba(232, 228, 220, 0.12);
+}
+
+.btn-ghost:hover {
+    color: #e8e4dc;
+    border-color: rgba(232, 228, 220, 0.25);
+}
+
+/* ── Notes List ── */
+.notes-section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(212, 175, 85, 0.6);
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.notes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ── Note Card ── */
+.note-card {
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(232, 228, 220, 0.07);
+    border-radius: 14px;
+    padding: 24px 28px;
+    position: relative;
+    transition: border-color 0.25s, transform 0.2s, background 0.25s;
+    overflow: hidden;
+}
+
+.note-card::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, #d4af55, transparent);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.25s;
+}
+
+.note-card:hover {
+    border-color: rgba(212, 175, 85, 0.2);
+    background: rgba(255, 255, 255, 0.04);
+    transform: translateX(3px);
+}
+
+.note-card:hover::after {
+    opacity: 1;
+}
+
+.note-index {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(212, 175, 85, 0.4);
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.note-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: #f5f0e8;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+}
+
+.note-description {
+    font-size: 13.5px;
+    color: rgba(232, 228, 220, 0.5);
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+.note-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.btn-edit {
+    padding: 7px 16px;
+    background: transparent;
+    border: 1px solid rgba(212, 175, 85, 0.3);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #d4af55;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+}
+
+.btn-edit:hover {
+    background: rgba(212, 175, 85, 0.1);
+    border-color: rgba(212, 175, 85, 0.6);
+}
+
+.btn-delete {
+    padding: 7px 16px;
+    background: transparent;
+    border: 1px solid rgba(232, 228, 220, 0.1);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(232, 228, 220, 0.35);
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+}
+
+.btn-delete:hover {
+    border-color: rgba(220, 80, 80, 0.4);
+    color: rgba(220, 100, 100, 0.8);
+    background: rgba(220, 80, 80, 0.06);
+}
+
+/* ── Empty State ── */
+.empty-state {
+    text-align: center;
+    padding: 64px 24px;
+}
+
+.empty-icon {
+    font-size: 40px;
+    margin-bottom: 16px;
+    opacity: 0.25;
+}
+
+.empty-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: rgba(232, 228, 220, 0.2);
+}
+
+.empty-sub {
+    font-size: 13px;
+    color: rgba(232, 228, 220, 0.15);
+    margin-top: 6px;
+}
+
+/* ── Divider ── */
+.divider {
+    border: none;
+    border-top: 1px solid rgba(232, 228, 220, 0.06);
+    margin: 40px 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* NoteForm.css */
+form {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 85, 0.15);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #f5f0e8;
+    margin-bottom: 12px;
+}
+
+form input[type="text"],
+form textarea,
+form input[type="file"] {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(232, 228, 220, 0.1);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #e8e4dc;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+form input[type="text"]::placeholder,
+form textarea::placeholder {
+    color: rgba(232, 228, 220, 0.3);
+}
+
+form input[type="text"]:focus,
+form textarea:focus,
+form input[type="file"]:focus {
+    border-color: rgba(212, 175, 85, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+}
+
+form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+form button {
+    align-self: flex-start;
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all 0.2s ease;
+    background: #d4af55;
+    color: #0d0d0d;
+}
+
+form button:hover {
+    background: #e0c170;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(212, 175, 85, 0.3);
 }
